@@ -23,8 +23,15 @@ Follow this steps.
  $ npm start
 ```
 
-### Scafolding:
+### Scaffolding:
 This is the directory structure
 
 ```sh
+/api
+  - api.js        (Expressjs server, modify from line 24 to add new routes) 
+  - api-events.js (Auxiliary module, don'y modif)
+/config
+  - config.json   (Configuration file)
+/lib
+/processor
 ```
