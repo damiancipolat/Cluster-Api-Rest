@@ -45,3 +45,9 @@ This is the directory structure
   - master.js    (Main process function, do'nt touch)
   - worker.js    (File to manage each api request, continuation to api.js)
 ```
+
+### Test:
+Examples, to try the apirest.
+
+http://127.0.0.1:9080/reverse/damian
+http://127.0.0.1:9080/sum/2/6
