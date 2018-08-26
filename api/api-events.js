@@ -20,7 +20,7 @@ const onError = (err)=>{
 const onListen = ()=>{
 
   //Logeo arranque del server.
-  console.log('Restaurant API');
+  console.log('Cluster - API');
   console.log('> Listenig in ip: 127.0.0.1 port:8080');
   console.log('> Process Id:',processObj.pid);
   console.log('');
