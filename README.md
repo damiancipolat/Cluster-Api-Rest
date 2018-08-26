@@ -3,7 +3,7 @@ In this project, I create a base Api Rest template using Nodejs & expressjs, but
 
 ### Configuration:
 Go to ./config/config.json
-```json
+```sh
 {
   "server":{
     "ip"   : "127.0.0.1", // Ip addres to bind socket
