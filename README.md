@@ -52,6 +52,34 @@ Examples, to try the api rest.
 http://127.0.0.1:9080/reverse/damian
 http://127.0.0.1:9080/sum/2/6
 ```
+### Real paralelism:
+When the server start make an output in the console and show each pid of the master and the child process.
+But, the OS decide in wich cpu each process will run. But we can specify and bind each process to one CPU, using
+the linux command "taskset" whe can make this magic.
+
+*Example: running the api rest using four workers*
+
+```sh
+npm start
+
+CLuster API
+> Listenig in ip: 127.0.0.1 port:8080
+> Process Id: 6691
+
+Api - rest ok
+> worker STARTED 6697
+> worker STARTED 6702
+> worker STARTED 6703
+> worker STARTED 6709
+```
+After, running this command to bind each process to a cpu id, in this example I use a quad core computer.
+
+```sh
+taskset -cp 1 6697
+taskset -cp 2 6702
+taskset -cp 3 6703
+taskset -cp 4 6709
+```
 
 ### To Do:
 - Parallel processing: Include the bind of process to each cpu using taskset command.
