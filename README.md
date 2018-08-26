@@ -50,4 +50,9 @@ This is the directory structure
 Examples, to try the apirest.
 
 http://127.0.0.1:9080/reverse/damian
+
 http://127.0.0.1:9080/sum/2/6
+
+### To Do:
+- Parallel processing: Include the bind of process to each cpu using taskset command.
+- Improve the communication method: make a more transparent way to handle the communication.
