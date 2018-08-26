@@ -6,12 +6,12 @@ Go to ./config/config.json
 ```json
 {
   "server":{
-    "ip"   : "127.0.0.1", --> Ip addres to bind socket
-    "port" : 9080         --> Port  
+    "ip"   : "127.0.0.1", // Ip addres to bind socket
+    "port" : 9080         // Port  
   },
   "workers" : {
-    "number"    : 4,       --> Define the number of child process      
-    "planifier" : "random" --> Define planification alghoritm only random available.
+    "number"    : 4,       // Define the number of child process      
+    "planifier" : "random" // Define planification alghoritm only random available.
   }
 }
 ```
