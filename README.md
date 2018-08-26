@@ -47,11 +47,11 @@ This is the directory structure
 ```
 
 ### Test:
-Examples, to try the apirest.
-
+Examples, to try the api rest.
+```sh
 http://127.0.0.1:9080/reverse/damian
-
 http://127.0.0.1:9080/sum/2/6
+```
 
 ### To Do:
 - Parallel processing: Include the bind of process to each cpu using taskset command.
