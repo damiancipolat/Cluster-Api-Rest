@@ -1,32 +1,39 @@
 const cluster    = require('cluster');
 const processObj = require('process');
-const lib 	     = require('../lib/lib.js');
 
-const onMasterMsg = (msg)=>{
+//Include custom modules.
+const lib = require('../lib/lib.js');
 
-  console.log('Received msj from master',msg);
+//Include commands.
+const reverseCommand = require('./commands/reverse.js');
+const calcCommand    = require('./commands/calc.js');
 
-  if (msg.type=='boostrap'){
-  	console.log('recibi',msg.type);
+//Worker process.
+class Worker{
+
+  run(){
+
+    console.log('> worker STARTED',processObj.pid);  
+    process.on('message',this.onMasterMsg);
+
   }
 
-  if (msg.type=='test'){
-  	console.log('recibi',msg.type);
+  onMasterMsg(msg){
+
+    let result = null;
+
+    //Depends the message, process it.
+    if (msg.type=='reverse')
+      result = reverseCommand(msg);
+
+    if (msg.type=='sum')
+      result = calcCommand(msg);
+    
+    //Send to the master process the result.
+    process.send(lib.toMaster(msg.id,'response',result));
+
   }
-
-  let payload = lib.getRandomInt(0,100);
-
-  process.send(lib.toMaster(msg.id,'response',payload));
 
 }
 
-const worker = ()=>{
-
-  console.log('> worker STARTED',processObj.pid);  
-  process.on('message',onMasterMsg);
-
-}
-
-
-
-module.exports = worker;
+module.exports = new Worker();

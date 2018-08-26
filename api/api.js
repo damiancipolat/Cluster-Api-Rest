@@ -21,10 +21,18 @@ app.use(apiEvents.CORS);
 //Start api-rest server.
 const start = async (master)=>{
 
-  app.get('/test',(req,res)=>{
+  //Reverse the parameter name
+  app.get('/sum/:n1/:n2',(req,res)=>{
+    master.sendToWorker(res,messages.baseMsg('sum',req.params));
+  });
 
-    master.sendToWorker(res,messages.baseMsg('test','1234567'));
+  //Reverse the parameter name
+  app.get('/reverse/:name',(req,res)=>{
+    master.sendToWorker(res,messages.baseMsg('reverse',req.params));
+  });
 
+  app.get('*',(req,res)=>{
+    res.status(400).json({"error":"bad request"});
   });
 
   try{
