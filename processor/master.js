@@ -6,20 +6,24 @@ const messeger  =  require('./manager/messages.js');
 //Include config.
 const config =  require('../config/config.json');
 
+//Administrative arrays.
+let workerIds     = [];
+let messageBuffer = [];
+
 //Master process class.
 class Master{
 
-  constructor(cluster){
+  constructor(){
 
     //Create administrative structures.
-    this.workerIds     = [];
-    this.messageBuffer = [];
-    this.cluster       = cluster;
+    this.cluster  = null;
 
   }
 
   //Main process function.
-  run(){
+  run(cluster){
+
+    this.cluster = cluster;
 
     //Create first the workers.
     this.createWorkers();
@@ -32,19 +36,19 @@ class Master{
   }
 
   //Send message to one worker, its called from the api.
-  sendToWorker(res,msg){
+  sendToWorker(res,command){
 
     //Get the object that select the worker.
-    let manage = new Manager(config.workers.planifier,this.workerIds);
+    let manage = new Manager(config.workers.planifier,workerIds);
 
     //Get the process id.
     let pId = manage.planify();
 
     //Create message to send a worker.
-    let msg = messeger.toWorker(pId,msg.type,msg.payload);    
+    let msg = messeger.toWorker(pId,command.type,command.payload);    
 
     //Add the msg to the buffer.
-    this.messageBuffer[msg.id] = {
+    messageBuffer[msg.id] = {
       origin : msg,
       reply  : null,
       client : res
@@ -66,7 +70,7 @@ class Master{
     for (const id in this.cluster.workers){    
     
       //Register worker in worker list.
-      this.workerIds.push(id);
+      workerIds.push(id);
 
       //Define handler.
       this.cluster.workers[id].on('message',this.onWorkerMsg);
@@ -78,13 +82,17 @@ class Master{
   //When receive a msg from the workers.
   onWorkerMsg(msg){
 
-    if ((msg.replyTo!=null)&&(this.messageBuffer[msg.replyTo]!=undefined)){
+    if (msg.replyTo!=null){
 
-      //Store the reply in the buffer.
-      this.messageBuffer[msg.replyTo].reply = msg;
+      if (messageBuffer[msg.replyTo]!=undefined){
 
-      //Send the response to the client.
-      this.messageBuffer[msg.replyTo].client.json({response:msg.payload});
+        //Store the reply in the buffer.
+        messageBuffer[msg.replyTo].reply = msg;
+
+        //Send the response to the client.
+        messageBuffer[msg.replyTo].client.json({response:msg.payload});
+
+      }
 
     }
 
@@ -92,4 +100,4 @@ class Master{
 
 }
 
-module.exports = Master;
+module.exports = new Master();

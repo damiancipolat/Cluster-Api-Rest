@@ -31,5 +31,15 @@ const toMaster = (replyId,typeData,payloadData)=>{
 
 }
 
+const baseMsg = (typeParam,payloadParam)=>{
+
+  return {
+    type    : typeParam,
+    payload : payloadParam
+  };
+
+}
+
+module.exports.baseMsg  = baseMsg;
 module.exports.toWorker = toWorker;
 module.exports.toMaster = toMaster;

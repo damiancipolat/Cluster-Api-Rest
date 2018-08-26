@@ -2,13 +2,13 @@
 const http       = require('http');
 const express    = require('express');
 const bodyParser = require('body-parser');
-const cluster    = require('cluster');
 
 //Include config file.
 const config    = require('../config/config.json');
 
 //Include custom modules.
 const apiEvents  = require('./api-events.js');
+const messages   = require('../processor/manager/messages.js');
 
 //Start Express-js
 const app    = express();
@@ -23,10 +23,7 @@ const start = async (master)=>{
 
   app.get('/test',(req,res)=>{
 
-    //sendToWorker(res,);
-    //sendMsg(req,res);
-    console.log(req.headers,req.body,req.params);
-    res.json({"test":123456789});
+    master.sendToWorker(res,messages.baseMsg('test','1234567'));
 
   });
 

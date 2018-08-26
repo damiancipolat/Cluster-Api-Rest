@@ -7,11 +7,11 @@ const onMasterMsg = (msg)=>{
   console.log('Received msj from master',msg);
 
   if (msg.type=='boostrap'){
-  	console.log('recibi');
+  	console.log('recibi',msg.type);
   }
 
   if (msg.type=='test'){
-  	console.log('recibi');
+  	console.log('recibi',msg.type);
   }
 
   let payload = lib.getRandomInt(0,100);
