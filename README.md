@@ -1,10 +1,9 @@
 # Cluster-Api-Rest
-In this project, I create an base Api Rest template using Nodejs & expressjs, but including the cluster module feature. So this nodejs process create other "children" process using fork, to solve and process each request.
+In this project, I create a base Api Rest template using Nodejs & expressjs, but including the cluster module feature. So this nodejs process create other "children" process using fork, to solve and process each request.
 
 ### Configuration:
 Go to ./config/config.json
-
-´´´json
+```json
 {
   "server":{
     "ip"   : "127.0.0.1",
@@ -15,10 +14,10 @@ Go to ./config/config.json
     "planifier" : "random"
   }
 }
-´´´
+```
 
 ### Install:
-´´´sh
+```sh
  $ npm install
  $ npm start
-´´´
+```
