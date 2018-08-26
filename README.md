@@ -17,7 +17,14 @@ Go to ./config/config.json
 ```
 
 ### Install:
+Follow this steps.
 ```sh
  $ npm install
  $ npm start
+```
+
+### Scafolding:
+This is the directory structure
+
+```sh
 ```
