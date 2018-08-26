@@ -26,7 +26,7 @@ Follow this steps.
 ### Scaffolding:
 This is the directory structure
 
-```js
+```sh
 /api
   - api.js        (Expressjs server, modify from line 24 to add new routes) 
   - api-events.js (Auxiliary module, don'y modif)
