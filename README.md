@@ -26,12 +26,22 @@ Follow this steps.
 ### Scaffolding:
 This is the directory structure
 
-```sh
+```js
 /api
   - api.js        (Expressjs server, modify from line 24 to add new routes) 
   - api-events.js (Auxiliary module, don'y modif)
 /config
   - config.json   (Configuration file)
 /lib
+  - lib.js        (Library file, do'nt modify)
 /processor
+  /manager
+   - helper      (Auxiliary functions)
+   - messages.js (IPC messages functions)
+   - manager.js  (Function with process planification alghoritms)
+  /commands
+    - calc.js    (Command file to process /sum/ url)
+    - reverse.js (Command file to process /reverse/ url)
+  - master.js    (Main process function, do'nt touch)
+  - worker.js    (File to manage each api request, continuation to api.js)
 ```
